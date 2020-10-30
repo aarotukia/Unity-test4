@@ -497,9 +497,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5036a60f22d8542ca830e4578804462b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spaceKeyDown: 0
   hasPowerup: 0
   powerupIndicator: {fileID: 1427939658}
   powerUpDuration: 5
+  boostSpeed: 700
 --- !u!1 &680832294
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerControllerX : MonoBehaviour
@@ -7,10 +8,11 @@ public class PlayerControllerX : MonoBehaviour
     private Rigidbody playerRb;
     private float speed = 500;
     private GameObject focalPoint;
-
+    public bool spaceKeyDown;
     public bool hasPowerup;
     public GameObject powerupIndicator;
     public int powerUpDuration = 9;
+    public float boostSpeed = 1100;      //boosted speed with spacebar
 
     private float normalStrength = 12; // how hard to hit enemy without powerup
     private float powerupStrength = 27; // how hard to hit enemy with powerup
@@ -23,12 +25,28 @@ public class PlayerControllerX : MonoBehaviour
 
     void Update()
     {
-        // Add force to player in direction of the focal point (and camera)
+    
         float verticalInput = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime); 
+        //if player is pressing space, move faster
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            spaceKeyDown = true;
+            playerRb.AddForce(focalPoint.transform.forward * verticalInput * boostSpeed * Time.deltaTime);
+       
+        }
+        else
+        {
+            playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime);
+       
+        }
+       
 
-        // Set powerup indicator position to beneath player
-        powerupIndicator.transform.position = transform.position + new Vector3(0, -0.6f, 0);
+            // Set powerup indicator position to beneath player
+            powerupIndicator.transform.position = transform.position + new Vector3(0, -0.6f, 0);
+
+
+
+
 
     }
 
