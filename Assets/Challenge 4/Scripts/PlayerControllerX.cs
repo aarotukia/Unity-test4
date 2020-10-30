@@ -10,10 +10,10 @@ public class PlayerControllerX : MonoBehaviour
 
     public bool hasPowerup;
     public GameObject powerupIndicator;
-    public int powerUpDuration = 5;
+    public int powerUpDuration = 9;
 
-    private float normalStrength = 10; // how hard to hit enemy without powerup
-    private float powerupStrength = 25; // how hard to hit enemy with powerup
+    private float normalStrength = 12; // how hard to hit enemy without powerup
+    private float powerupStrength = 27; // how hard to hit enemy with powerup
     
     void Start()
     {
@@ -67,7 +67,15 @@ public class PlayerControllerX : MonoBehaviour
             Debug.Log("Player collided with " + collision.gameObject + " with powerup set to " + hasPowerup);
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
         }
-    }
+        else
+        {
+            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
+            enemyRigidbody.AddForce(awayFromPlayer * normalStrength, ForceMode.Impulse);
+        }
+
+        }
+    
 }
 
 
