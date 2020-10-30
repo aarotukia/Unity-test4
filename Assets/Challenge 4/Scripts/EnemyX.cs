@@ -7,7 +7,7 @@ public class EnemyX : MonoBehaviour
     public float speed;
     private Rigidbody enemyRb;
     private GameObject playerGoal;
-
+    public float waveCount = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class EnemyX : MonoBehaviour
     {
         // Set enemy direction towards player goal and move there
         Vector3 lookDirection = (playerGoal.transform.position - transform.position).normalized;
-        enemyRb.AddForce(lookDirection * speed * Time.deltaTime);
+        enemyRb.AddForce(lookDirection * speed * (waveCount *5) * Time.deltaTime);
 
     }
 
@@ -30,10 +30,12 @@ public class EnemyX : MonoBehaviour
         if (other.gameObject.name == "Enemy Goal")
         {
             Destroy(gameObject);
+            waveCount++;
         } 
         else if (other.gameObject.name == "Player Goal")
         {
             Destroy(gameObject);
+            waveCount++;
         }
 
     }
